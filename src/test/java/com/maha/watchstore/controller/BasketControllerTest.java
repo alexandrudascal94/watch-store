@@ -24,4 +24,13 @@ public class BasketControllerTest {
                 .andExpect(status().isBadRequest())
                 .andReturn();
     }
+
+    @Test
+    public void missingItemsCheckout_ShouldReturn_BadRequest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/checkout")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[-1, -3]"))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
 }
