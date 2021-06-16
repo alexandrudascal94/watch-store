@@ -1,5 +1,6 @@
 package com.maha.watchstore.service;
 
+import com.maha.watchstore.entity.Discount;
 import com.maha.watchstore.entity.Product;
 import com.maha.watchstore.exception.NonExistentProductException;
 import com.maha.watchstore.respository.ProductRepository;
@@ -29,8 +30,13 @@ public class BasketService {
                 .sum();
     }
 
-    private long getPriceWithDiscount(Optional<Product> product, Long count) {
-        final long productPrice = product.orElseThrow(() -> new NonExistentProductException("The product does not exist")).getPrice();
-        return productPrice * count;
+    private long getPriceWithDiscount(Optional<Product> optionalProduct, Long itemsCount) {
+        final Product product = optionalProduct.orElseThrow(() -> new NonExistentProductException("The product does not exist"));
+        Discount discount = product.getDiscount();
+
+        long discounts = itemsCount / discount.getUnits();
+        long notDiscountItems = itemsCount - discounts * product.getDiscount().getUnits();
+
+        return discounts * discount.getPrice() + notDiscountItems * product.getPrice();
     }
 }

@@ -1,5 +1,6 @@
 package com.maha.watchstore.service;
 
+import com.maha.watchstore.entity.Discount;
 import com.maha.watchstore.entity.Product;
 import com.maha.watchstore.exception.NonExistentProductException;
 import com.maha.watchstore.respository.ProductRepository;
@@ -26,6 +27,7 @@ public class BasketServiceTest {
 
     private Product productOne = new Product();
     private Product productTwo = new Product();
+    private Discount discountOne = new Discount();
 
     @Test
     public void calculatePriceFor_singleItemNoDiscount_ShouldReturn_itemPrice() {
@@ -55,6 +57,26 @@ public class BasketServiceTest {
         productOne.setPrice(100L);
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(productOne));
         assertEquals(300L, serviceUnderTest.calculatePriceFor(List.of(1L, 1L, 1L)));
+    }
+
+    @Test
+    public void calculatePriceFor_discountedProducts_ShouldReturn_discountedPrice() {
+        productOne.setPrice(100L);
+        discountOne.setUnits(3);
+        discountOne.setPrice(200L);
+        productOne.setDiscount(discountOne);
+        when(productRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(productOne));
+        assertEquals(200L, serviceUnderTest.calculatePriceFor(List.of(1L, 1L, 1L)));
+    }
+
+    @Test
+    public void calculatePriceFor_discountedAndNotDiscountedProducts_ShouldReturn_correctPrice() {
+        productOne.setPrice(100L);
+        discountOne.setUnits(3);
+        discountOne.setPrice(200L);
+        productOne.setDiscount(discountOne);
+        when(productRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(productOne));
+        assertEquals(300L, serviceUnderTest.calculatePriceFor(List.of(1L, 1L, 1L, 1L)));
     }
 }
 
