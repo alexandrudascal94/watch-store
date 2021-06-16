@@ -22,16 +22,19 @@ public class BasketServiceTest {
     @Autowired
     private BasketService serviceUnderTest;
 
+    private Product productOne = new Product();
+    private Product productTwo = new Product();
+
     @Test
     public void calculatePriceFor_singleItemNoDiscount_ShouldReturn_itemPrice() {
+        productOne.setPrice(200L);
+        when(productRepositoryMock.findById(1L)).thenReturn(Optional.of(productOne));
         Assertions.assertEquals(200L, serviceUnderTest.calculatePriceFor(List.of(1L)));
     }
 
     @Test
     public void calculatePriceFor_multipleDifferentItemsNoDiscount_ShouldReturn_totalPricePrice() {
-        Product productOne = new Product();
         productOne.setPrice(100L);
-        Product productTwo = new Product();
         productTwo.setPrice(200L);
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.of(productOne));
         when(productRepositoryMock.findById(2L)).thenReturn(Optional.of(productTwo));
