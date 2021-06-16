@@ -2,7 +2,7 @@ package com.maha.watchstore.controller;
 
 import com.maha.watchstore.dto.Checkout;
 import com.maha.watchstore.exception.UnsupportedBasketItemsException;
-import com.maha.watchstore.service.BasketService.BasketService;
+import com.maha.watchstore.service.BasketService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

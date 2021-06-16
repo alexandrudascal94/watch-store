@@ -1,4 +1,4 @@
-package com.maha.watchstore.service.BasketService;
+package com.maha.watchstore.service;
 
 import com.maha.watchstore.exception.UnsupportedBasketItemsException;
 import org.springframework.stereotype.Service;

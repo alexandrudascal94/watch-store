@@ -1,7 +1,7 @@
 package com.maha.watchstore.controller;
 
 import com.maha.watchstore.exception.UnsupportedBasketItemsException;
-import com.maha.watchstore.service.BasketService.BasketService;
+import com.maha.watchstore.service.BasketService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
