@@ -1,7 +1,8 @@
 package com.maha.watchstore.service;
 
 
-import com.maha.watchstore.exception.UnsupportedBasketItemsException;
+import com.maha.watchstore.exception.NonExistentProductException;
+import com.maha.watchstore.exception.UnsupportedItemException;
 import com.maha.watchstore.respository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class BasketService {
 
     public Long calculatePriceFor(List<Long> itemIds) {
         return itemIds.stream().mapToLong(id -> productRepository.findById(id)
-                .orElseThrow(() -> new UnsupportedBasketItemsException("One item could not be find"))
+                .orElseThrow(() -> new NonExistentProductException("The product does not exist"))
                 .getPrice())
                 .sum();
     }

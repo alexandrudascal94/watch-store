@@ -1,6 +1,6 @@
 package com.maha.watchstore.controller;
 
-import com.maha.watchstore.exception.UnsupportedBasketItemsException;
+import com.maha.watchstore.exception.UnsupportedItemException;
 import com.maha.watchstore.service.BasketService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ public class BasketControllerTest {
 
     @Test
     public void unsupportedItemsCheckout_ShouldReturn_BadRequest() throws Exception {
-        when(basketService.calculatePriceFor(any())).thenThrow(new UnsupportedBasketItemsException("Requested items are not valid"));
+        when(basketService.calculatePriceFor(any())).thenThrow(new UnsupportedItemException("Requested items are not valid"));
         mockMvc.perform(MockMvcRequestBuilders.post(CHECKOUT_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[-1, -3]"))

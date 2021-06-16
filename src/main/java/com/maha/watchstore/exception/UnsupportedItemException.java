@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UnsupportedBasketItemsException extends RuntimeException {
-    public UnsupportedBasketItemsException(String message) {
+public class UnsupportedItemException extends RuntimeException {
+    public UnsupportedItemException(String message) {
         super(message);
     }
 }

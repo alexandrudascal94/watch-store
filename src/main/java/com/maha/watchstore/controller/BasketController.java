@@ -1,7 +1,7 @@
 package com.maha.watchstore.controller;
 
 import com.maha.watchstore.dto.Checkout;
-import com.maha.watchstore.exception.UnsupportedBasketItemsException;
+import com.maha.watchstore.exception.UnsupportedItemException;
 import com.maha.watchstore.service.BasketService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class BasketController {
     @PostMapping("checkout")
     public ResponseEntity<Checkout> checkout(@RequestBody List<Long> itemIds) {
         if(itemIds.isEmpty()){
-            throw new UnsupportedBasketItemsException("The item list can not be empty");
+            throw new UnsupportedItemException("The basket can not be empty");
         }
 
         return ResponseEntity.ok().body(

@@ -1,7 +1,8 @@
 package com.maha.watchstore.service;
 
 import com.maha.watchstore.entity.Product;
-import com.maha.watchstore.exception.UnsupportedBasketItemsException;
+import com.maha.watchstore.exception.NonExistentProductException;
+import com.maha.watchstore.exception.UnsupportedItemException;
 import com.maha.watchstore.respository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,9 @@ public class BasketServiceTest {
     }
 
     @Test
-    public void calculatePriceFor_UnsupportedItem_ShouldThrow_UnsupportedBasketItemsException() {
-        when(productRepositoryMock.findById(-1L)).thenThrow(UnsupportedBasketItemsException.class);
-        assertThrows(UnsupportedBasketItemsException.class, () -> serviceUnderTest.calculatePriceFor(List.of(-1L)));
+    public void calculatePriceFor_NonExistentProduct_ShouldThrow_NonExistentProductException() {
+        when(productRepositoryMock.findById(-1L)).thenThrow(NonExistentProductException.class);
+        assertThrows(NonExistentProductException.class, () -> serviceUnderTest.calculatePriceFor(List.of(-1L)));
     }
-
 }
 
