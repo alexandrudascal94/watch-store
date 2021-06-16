@@ -1,6 +1,7 @@
 package com.maha.watchstore.service;
 
 import com.maha.watchstore.entity.Product;
+import com.maha.watchstore.exception.UnsupportedBasketItemsException;
 import com.maha.watchstore.respository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -41,5 +42,12 @@ public class BasketServiceTest {
 
         Assertions.assertEquals(300L, serviceUnderTest.calculatePriceFor(List.of(1L, 2L)));
     }
+
+    @Test
+    public void calculatePriceFor_UnsupportedItem_ShouldThrow_UnsupportedBasketItemsException() {
+        when(productRepositoryMock.findById(-1L)).thenThrow(UnsupportedBasketItemsException.class);
+        Assertions.assertThrows(UnsupportedBasketItemsException.class, () -> serviceUnderTest.calculatePriceFor(List.of(-1L)));
+    }
+
 }
 
