@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class BasketService {
-    public Long checkout(List<Long> itemIds) {
+    public Long calculatePriceFor(List<Long> itemIds) {
         throw new UnsupportedBasketItemsException("ItemIds list is empty");
     }
 }

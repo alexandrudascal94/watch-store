@@ -1,5 +1,6 @@
 package com.maha.watchstore.controller;
 
+import com.maha.watchstore.dto.Checkout;
 import com.maha.watchstore.exception.UnsupportedBasketItemsException;
 import com.maha.watchstore.service.BasketService.BasketService;
 import lombok.AllArgsConstructor;
@@ -19,10 +20,14 @@ public class BasketController {
     private final BasketService basketService;
 
     @PostMapping("checkout")
-    public ResponseEntity<Long> checkout(@RequestBody List<Long> itemIds) {
+    public ResponseEntity<Checkout> checkout(@RequestBody List<Long> itemIds) {
         if(itemIds.isEmpty()){
             throw new UnsupportedBasketItemsException("The item list can not be empty");
         }
-        return ResponseEntity.ok().body(basketService.checkout(itemIds));
+
+        return ResponseEntity.ok().body(
+                Checkout.builder()
+                        .price(basketService.calculatePriceFor(itemIds))
+                        .build());
     }
 }

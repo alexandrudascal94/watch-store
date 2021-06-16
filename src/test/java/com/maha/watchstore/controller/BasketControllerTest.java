@@ -37,7 +37,7 @@ public class BasketControllerTest {
 
     @Test
     public void unsupportedItemsCheckout_ShouldReturn_BadRequest() throws Exception {
-        when(basketService.checkout(any())).thenThrow(new UnsupportedBasketItemsException("Requested items are not valid"));
+        when(basketService.calculatePriceFor(any())).thenThrow(new UnsupportedBasketItemsException("Requested items are not valid"));
         mockMvc.perform(MockMvcRequestBuilders.post(CHECKOUT_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[-1, -3]"))
@@ -47,12 +47,12 @@ public class BasketControllerTest {
 
     @Test
     public void itemsCheckout_ShouldReturn_totalPrice() throws Exception {
-        when(basketService.checkout(any())).thenReturn(200L);
+        when(basketService.calculatePriceFor(any())).thenReturn(200L);
         mockMvc.perform(MockMvcRequestBuilders.post(CHECKOUT_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[1, 2]"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.price", Matchers.is(200L)))
+                .andExpect(jsonPath("$.price", Matchers.is(200)))
                 .andReturn();
     }
 }
