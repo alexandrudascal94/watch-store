@@ -2,6 +2,7 @@ package com.maha.watchstore.controller;
 
 import com.maha.watchstore.exception.UnsupportedBasketItemsException;
 import com.maha.watchstore.service.BasketService.BasketService;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,8 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 public class BasketControllerTest {
@@ -42,6 +42,17 @@ public class BasketControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[-1, -3]"))
                 .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    public void itemsCheckout_ShouldReturn_totalPrice() throws Exception {
+        when(basketService.checkout(any())).thenReturn(200L);
+        mockMvc.perform(MockMvcRequestBuilders.post(CHECKOUT_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("[1, 2]"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.price", Matchers.is(200L)))
                 .andReturn();
     }
 }
