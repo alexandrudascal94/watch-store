@@ -21,6 +21,9 @@ public class BasketServiceTest {
         Assertions.assertEquals(200L, serveUnderTest.calculatePriceFor(List.of(1L)));
     }
 
-
+    @Test
+    public void calculatePriceFor_multipleDifferentItemsNoDiscount_ShouldReturn_totalPricePrice() {
+        Assertions.assertEquals(300L, serveUnderTest.calculatePriceFor(List.of(1L, 2L, 3L)));
+    }
 }
 
