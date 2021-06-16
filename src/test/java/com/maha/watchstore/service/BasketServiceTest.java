@@ -3,7 +3,6 @@ package com.maha.watchstore.service;
 import com.maha.watchstore.entity.Product;
 import com.maha.watchstore.exception.UnsupportedBasketItemsException;
 import com.maha.watchstore.respository.ProductRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = {BasketService.class})
@@ -30,7 +31,7 @@ public class BasketServiceTest {
     public void calculatePriceFor_singleItemNoDiscount_ShouldReturn_itemPrice() {
         productOne.setPrice(200L);
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.of(productOne));
-        Assertions.assertEquals(200L, serviceUnderTest.calculatePriceFor(List.of(1L)));
+        assertEquals(200L, serviceUnderTest.calculatePriceFor(List.of(1L)));
     }
 
     @Test
@@ -40,13 +41,13 @@ public class BasketServiceTest {
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.of(productOne));
         when(productRepositoryMock.findById(2L)).thenReturn(Optional.of(productTwo));
 
-        Assertions.assertEquals(300L, serviceUnderTest.calculatePriceFor(List.of(1L, 2L)));
+        assertEquals(300L, serviceUnderTest.calculatePriceFor(List.of(1L, 2L)));
     }
 
     @Test
     public void calculatePriceFor_UnsupportedItem_ShouldThrow_UnsupportedBasketItemsException() {
         when(productRepositoryMock.findById(-1L)).thenThrow(UnsupportedBasketItemsException.class);
-        Assertions.assertThrows(UnsupportedBasketItemsException.class, () -> serviceUnderTest.calculatePriceFor(List.of(-1L)));
+        assertThrows(UnsupportedBasketItemsException.class, () -> serviceUnderTest.calculatePriceFor(List.of(-1L)));
     }
 
 }
