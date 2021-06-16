@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class EmptyBasketException extends RuntimeException {
-    public EmptyBasketException(String message) {
+public class UnsupportedBasketItemsException extends RuntimeException {
+    public UnsupportedBasketItemsException(String message) {
         super(message);
     }
 }

@@ -1,6 +1,7 @@
 package com.maha.watchstore.controller;
 
-import com.maha.watchstore.exception.EmptyBasketException;
+import com.maha.watchstore.exception.UnsupportedBasketItemsException;
+import com.maha.watchstore.service.BasketService.BasketService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,14 +13,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/")
+@AllArgsConstructor
 public class BasketController {
 
+    private final BasketService basketService;
 
     @PostMapping("checkout")
     public ResponseEntity<Long> checkout(@RequestBody List<Long> itemIds) {
         if(itemIds.isEmpty()){
-            throw new EmptyBasketException("The item list can not be empty");
+            throw new UnsupportedBasketItemsException("The item list can not be empty");
         }
-        return ResponseEntity.ok().body(300L);
+        return ResponseEntity.ok().body(basketService.checkout(itemIds));
     }
 }
