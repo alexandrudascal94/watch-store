@@ -17,7 +17,10 @@ public class BasketServiceTest {
     private BasketService serveUnderTest;
 
     @Test
-    public void calculatePriceFor_singleItem_ShouldReturn_itemPrice() {
+    public void calculatePriceFor_singleItemNoDiscount_ShouldReturn_itemPrice() {
         Assertions.assertEquals(200L, serveUnderTest.calculatePriceFor(List.of(1L)));
     }
+
+
 }
+
