@@ -29,12 +29,15 @@ public class ProductServiceTest {
     private Product productOne;
     private Product productTwo;
     private Discount discountOne;
+    private Discount discountTwo;
+
 
     @BeforeEach
     public void beforeAll() {
         productOne = new Product();
         productTwo = new Product();
         discountOne = new Discount();
+        discountTwo = new Discount();
     }
 
     @Test
@@ -85,6 +88,24 @@ public class ProductServiceTest {
         productOne.setDiscount(discountOne);
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(productOne));
         assertEquals(300L, serviceUnderTest.calculateTotalPriceFor(List.of(1L, 1L, 1L, 1L)));
+    }
+
+    @Test
+    public void calculatePriceFor_differentDiscountedProducts_ShouldReturn_correctPrice() {
+        discountOne.setUnits(3);
+        discountOne.setPrice(200L);
+        productOne.setPrice(100L);
+        productOne.setDiscount(discountOne);
+
+        productTwo.setPrice(200L);
+        discountTwo.setUnits(2);
+        discountTwo.setPrice(300L);
+        productTwo.setDiscount(discountTwo);
+
+        when(productRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(productOne));
+        when(productRepositoryMock.findById(2L)).thenReturn(Optional.ofNullable(productTwo));
+
+        assertEquals(800L, serviceUnderTest.calculateTotalPriceFor(List.of(1L, 1L, 1L, 1L, 2L, 2L, 2L)));
     }
 }
 
