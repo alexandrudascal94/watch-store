@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.maha</groupId>
 	<artifactId>watch-store</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>watch-store</name>
 	<description>Maha - Backend Engineer - Coding Challenge</description>
 	<properties>
