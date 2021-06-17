@@ -4,6 +4,7 @@ import com.maha.watchstore.entity.Discount;
 import com.maha.watchstore.entity.Product;
 import com.maha.watchstore.exception.NonExistentProductException;
 import com.maha.watchstore.respository.ProductRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,9 +26,16 @@ public class ProductServiceTest {
     @Autowired
     private ProductService serviceUnderTest;
 
-    private Product productOne = new Product();
-    private Product productTwo = new Product();
-    private Discount discountOne = new Discount();
+    private Product productOne;
+    private Product productTwo;
+    private Discount discountOne;
+
+    @BeforeEach
+    public void beforeAll() {
+        productOne = new Product();
+        productTwo = new Product();
+        discountOne = new Discount();
+    }
 
     @Test
     public void calculatePriceFor_singleItemNoDiscount_ShouldReturn_itemPrice() {
