@@ -26,7 +26,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void getProductById_NonExistingId_should_returnEmpty() {
+    void getProductById_nonExistingId_should_returnEmpty() {
         long nonExistingProductId = -1L;
         Optional<Product> expectedProduct = productRepository.findById(nonExistingProductId);
         assertTrue(expectedProduct.isEmpty());

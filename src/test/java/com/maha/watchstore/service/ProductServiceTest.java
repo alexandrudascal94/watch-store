@@ -2,7 +2,7 @@ package com.maha.watchstore.service;
 
 import com.maha.watchstore.entity.Discount;
 import com.maha.watchstore.entity.Product;
-import com.maha.watchstore.exception.NonExistentProductException;
+import com.maha.watchstore.exception.NonExistingProductException;
 import com.maha.watchstore.respository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,14 +41,14 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void calculatePriceFor_singleItemNoDiscount_ShouldReturn_itemPrice() {
+    public void calculatePriceFor_singleProductNoDiscount_ShouldReturn_productPrice() {
         productOne.setPrice(200L);
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.of(productOne));
         assertEquals(200L, serviceUnderTest.calculateTotalPriceFor(List.of(1L)));
     }
 
     @Test
-    public void calculatePriceFor_multipleDifferentProductNoDiscount_ShouldReturn_totalPricePrice() {
+    public void calculatePriceFor_multipleDifferentProductsNoDiscount_ShouldReturn_totalPrice() {
         productOne.setPrice(100L);
         productTwo.setPrice(200L);
         when(productRepositoryMock.findById(1L)).thenReturn(Optional.of(productOne));
@@ -58,9 +58,9 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void calculatePriceFor_NonExistentProduct_ShouldThrow_NonExistentProductException() {
-        when(productRepositoryMock.findById(-1L)).thenThrow(NonExistentProductException.class);
-        assertThrows(NonExistentProductException.class, () -> serviceUnderTest.calculateTotalPriceFor(List.of(-1L)));
+    public void calculatePriceFor_nonExistingProduct_ShouldThrow_NonExistingProductException() {
+        when(productRepositoryMock.findById(-1L)).thenThrow(NonExistingProductException.class);
+        assertThrows(NonExistingProductException.class, () -> serviceUnderTest.calculateTotalPriceFor(List.of(-1L)));
     }
 
     @Test

@@ -2,7 +2,7 @@ package com.maha.watchstore.service;
 
 import com.maha.watchstore.entity.Discount;
 import com.maha.watchstore.entity.Product;
-import com.maha.watchstore.exception.NonExistentProductException;
+import com.maha.watchstore.exception.NonExistingProductException;
 import com.maha.watchstore.respository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class ProductService {
     }
 
     private long calculateProductPrice(Optional<Product> possibleProduct, Long numberOfProducts) {
-        final Product product = possibleProduct.orElseThrow(() -> new NonExistentProductException("The product does not exist"));
+        final Product product = possibleProduct.orElseThrow(() -> new NonExistingProductException("The product does not exist"));
 
         if(product.hasDiscount()){
             return calculateDiscountedPrice(product, numberOfProducts);
