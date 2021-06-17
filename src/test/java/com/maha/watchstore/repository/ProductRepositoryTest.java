@@ -18,7 +18,15 @@ public class ProductRepositoryTest {
 
     @Test
     void getProductById_should_returnCorrespondingProduct() {
-        Optional<Product> expectedProduct = productRepository.findById(1L);
+        long existingProductId = 1L;
+        Optional<Product> expectedProduct = productRepository.findById(existingProductId);
         assertTrue(expectedProduct.isPresent());
+    }
+
+    @Test
+    void getProductById_NonExistingId_should_returnEmpty() {
+        long nonExistingProductId = -1L;
+        Optional<Product> expectedProduct = productRepository.findById(nonExistingProductId);
+        assertTrue(expectedProduct.isEmpty());
     }
 }
