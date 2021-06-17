@@ -2,7 +2,7 @@ package com.maha.watchstore.controller;
 
 import com.maha.watchstore.dto.Checkout;
 import com.maha.watchstore.exception.UnsupportedItemException;
-import com.maha.watchstore.service.BasketService;
+import com.maha.watchstore.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BasketController {
 
-    private final BasketService basketService;
+    private final ProductService productService;
 
     @PostMapping("checkout")
     public ResponseEntity<Checkout> checkout(@RequestBody List<Long> itemIds) {
@@ -27,7 +27,7 @@ public class BasketController {
 
         return ResponseEntity.ok().body(
                 Checkout.builder()
-                        .price(basketService.calculatePriceFor(itemIds))
+                        .price(productService.calculateTotalPriceFor(itemIds))
                         .build());
     }
 }

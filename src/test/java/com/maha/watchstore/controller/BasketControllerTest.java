@@ -1,7 +1,7 @@
 package com.maha.watchstore.controller;
 
 import com.maha.watchstore.exception.UnsupportedItemException;
-import com.maha.watchstore.service.BasketService;
+import com.maha.watchstore.service.ProductService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class BasketControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private BasketService basketService;
+    private ProductService productService;
 
     @Test
     public void noItemsCheckout_ShouldReturn_BadRequest() throws Exception {
@@ -37,7 +37,7 @@ public class BasketControllerTest {
 
     @Test
     public void unsupportedItemsCheckout_ShouldReturn_BadRequest() throws Exception {
-        when(basketService.calculatePriceFor(any())).thenThrow(new UnsupportedItemException("Requested items are not valid"));
+        when(productService.calculateTotalPriceFor(any())).thenThrow(new UnsupportedItemException("Requested items are not valid"));
         mockMvc.perform(MockMvcRequestBuilders.post(CHECKOUT_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[-1, -3]"))
@@ -47,7 +47,7 @@ public class BasketControllerTest {
 
     @Test
     public void itemsCheckout_ShouldReturn_totalPrice() throws Exception {
-        when(basketService.calculatePriceFor(any())).thenReturn(200L);
+        when(productService.calculateTotalPriceFor(any())).thenReturn(200L);
         mockMvc.perform(MockMvcRequestBuilders.post(CHECKOUT_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[1, 2]"))
