@@ -1,4 +1,4 @@
-package com.maha.watchstore;
+package com.maha.watchstore.repository;
 
 import com.maha.watchstore.entity.Product;
 import com.maha.watchstore.respository.ProductRepository;
