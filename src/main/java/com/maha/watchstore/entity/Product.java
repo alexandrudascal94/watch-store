@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -23,4 +24,7 @@ public class Product {
     @JoinColumn(name = "discountId")
     Discount discount;
 
+    public boolean hasDiscount(){
+        return Optional.ofNullable(discount).isPresent();
+    }
 }

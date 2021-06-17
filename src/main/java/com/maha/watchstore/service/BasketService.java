@@ -32,6 +32,14 @@ public class BasketService {
 
     private long getPriceWithDiscount(Optional<Product> optionalProduct, Long itemsCount) {
         final Product product = optionalProduct.orElseThrow(() -> new NonExistentProductException("The product does not exist"));
+
+        if(product.hasDiscount()){
+            return calculateDiscountedPrice(product, itemsCount);
+        }
+        return product.getPrice() * itemsCount;
+    }
+
+    private long calculateDiscountedPrice(Product product, Long itemsCount) {
         Discount discount = product.getDiscount();
 
         long discounts = itemsCount / discount.getUnits();
