@@ -2,7 +2,6 @@ package com.maha.watchstore;
 
 import com.maha.watchstore.entity.Product;
 import com.maha.watchstore.respository.ProductRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
