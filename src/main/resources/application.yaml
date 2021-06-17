@@ -1,3 +1,6 @@
+server:
+  error:
+    include-stacktrace: never
 spring:
   jpa:
     show-sql: true
@@ -8,6 +11,15 @@ spring:
           dialect: org.hibernate.dialect.H2Dialect
   datasource:
     url: jdbc:h2:mem:watch-store-db;
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+
+---
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:mem:test-watch-store-db;
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
