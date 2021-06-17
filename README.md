@@ -14,28 +14,26 @@ Watch Id     | Watch Name  | Watch Price  | Watch Discount |
 
 ### Requirements:
 * The first two products have a possible discount. As an example, if the user attempts to
-checkout three or six Rolex watches then they will receive the discount price once or twice,
-respectively.
+  checkout three or six Rolex watches then they will receive the discount price once or twice,
+  respectively.
 * There is no limit to the number of items or combinations of watches a user can checkout.
 * There is no limit to the number of times a discount can be used.
 * Similarly, a user can checkout a single item if they wish.
 
-## Implementation 
+## Implementation
 
 The solution is implemented following TDD approach(see commits history) with functional and unit tests.
 
 ### To improve
-The solution provides just one discount for a selling item, it can be enhanced and add multiple discounts (e.g. 3 items for 200, 5 items for 300) 
+The solution provides just one discount for a selling item, it can be enhanced and add multiple discounts (e.g. 3 items for 200, 5 items for 300) for the same product
 
-### Technologies used: 
- * Java 11
- * Spring Boot 
- * Junit 5
- * JPA (with H2 database)
+### Technologies used:
+* Java 11
+* Spring Boot
+* Junit 5
+* JPA (with H2 database)
 
-### 
-    
-### API documentation
+### API sample
 
 ```json
 
@@ -74,7 +72,7 @@ Content-Type: app
 clone the git repository or downland the zip file and unzip
 
 ```
-https://github.com/alexandrudascal94/watch-store.git
+git clone https://github.com/alexandrudascal94/watch-store.git
 ```
 
 To build the application run command:
@@ -84,7 +82,7 @@ mvn clean install
 ```
 
 #### Run
-Then run the application with command: 
+Then run the application with command:
 
 ```
 java -jar target/watch-store-1.0.0.jar
