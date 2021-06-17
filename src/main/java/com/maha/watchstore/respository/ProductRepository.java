@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-    @Query("SELECT u FROM Product u JOIN FETCH u.discount WHERE u.id = :productId ")
+    @Query("SELECT u FROM Product u LEFT JOIN FETCH u.discount WHERE u.id = :productId")
     Optional<Product> findById(@Param("productId") Long id);
 }
