@@ -22,11 +22,18 @@ respectively.
 
 ## Implementation 
 
+The solution is implemented following TDD approach(see commits history) with functional and unit tests.
+
+### To improve
+The solution provides just one discount for a selling item, it can be enhanced and add multiple discounts (e.g. 3 items for 200, 5 items for 300) 
+
 ### Technologies used: 
  * Java 11
  * Spring Boot 
  * Junit 5
  * JPA (with H2 database)
+
+### 
     
 ### API documentation
 
@@ -36,11 +43,11 @@ Request:
 
 POST http://localhost:8080/checkout
         
-# Headers
+ Headers
 Accept: application/json
 Content-Type: application/json
 
-# Body
+ Body
 [
 "001",
 "002",
@@ -51,10 +58,10 @@ Content-Type: application/json
 
 Response: 
         
-# Headers
+ Headers
 Content-Type: app
         
-# Body
+ Body
 { 
   "price": 360 
 }
@@ -62,7 +69,7 @@ Content-Type: app
 
 ### Build and Run
 
-#### Requiremts
+#### Requirements
 
     * Java 11
     * Maven 3+
