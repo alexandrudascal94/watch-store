@@ -2,7 +2,7 @@
 
 ## Overview
 
-A single endpoint that take a list of watches and return the total cost. In terms of programming language Java 11 is
+A single endpoint API service that take a list of watches and return the total cost. In terms of programming language Java 11 is
 used. Below is a catalogue of four watches, and their associated prices, discounts:
 
 Watch Id     | Watch Name  | Watch Price  | Watch Discount |  
@@ -48,13 +48,7 @@ Accept: application/json
 Content-Type: application/json
 
  Body
-[
-"001",
-"002",
-"001",
-"004",
-"003"
-]
+[ 1, 2, 1, 4, 3]
 
 Response: 
         
@@ -75,3 +69,23 @@ Content-Type: app
     * Maven 3+
 
 #### Build
+
+
+clone the git repository or downland the zip file and unzip
+
+```
+https://github.com/alexandrudascal94/watch-store.git
+```
+
+To build the application run command:
+
+```
+mvn clean install
+```
+
+#### Run
+Then run the application with command: 
+
+```
+java -jar target/watch-store-1.0.0.jar
+```
